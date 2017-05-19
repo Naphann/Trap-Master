@@ -9,5 +9,5 @@
 > ./setup.sh
 ```
 
-3. otherwise copy all the files in ```/Config``` and paste them into ```/.git/hooks``` folder
+3. otherwise copy all the files in ```/Config``` and paste them into ```/.git/hooks``` folder if the hooks folder doesn't exists create them
 
