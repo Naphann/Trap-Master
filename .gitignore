@@ -20,6 +20,9 @@ ExportedObj/
 *.svd
 *.vs
 
+# Allow .dll files
+!*.dll
+
 # Unity3D generated meta files
 *.pidb.meta
 
