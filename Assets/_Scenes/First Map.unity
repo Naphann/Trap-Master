@@ -416,7 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   group: 0
   stanbyCamera: {fileID: 1045768400}
-  isOfflineMode: 0
+  isOfflineMode: 1
 --- !u!4 &845379136
 Transform:
   m_ObjectHideFlags: 0

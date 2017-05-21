@@ -39,20 +39,20 @@ public class RadiusActivateTrap : MonoBehaviour {
 
     private void Die() {
         // send to MasterClient to remove this trap from the map
-        Debug.Log("Trap die");
+        //Debug.Log("Trap die");
         PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other) {
         if (!isDetnotate && other.gameObject.CompareTag("Player")) {
-            Debug.Log("Radius Trap Trigger");
+            //Debug.Log("Radius Trap Trigger");
             isDetnotate = true;
             DoEffect();
         }
     }
 
     private void DoEffect() {
-        Debug.Log("Do effect");
+        //Debug.Log("Do effect");
         var activationScript = GetComponentInChildren<ITrapActivation>();
         activationScript.Activate();
     }
