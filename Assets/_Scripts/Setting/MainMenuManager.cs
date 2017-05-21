@@ -4,69 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class NetworkManager : MonoBehaviour {
-
-    public int group = 0;
-    public GameObject stanbyCamera;
-    private SpawnSpot[] spawnSpots;
-    public bool isOfflineMode;
-    public Transform teamMenu, mainMenu, teamAReady, teamBReady, trapMenu, tutorial, healthBar;
+public class MainMenuManager : MonoBehaviour {
+    public Transform teamMenu, mainMenu, teamAReady, teamBReady, trapMenu, tutorial;
     public int teamID = 0;
     public string playerName;
-    // Use this for initialization
-    void Start() {
-        spawnSpots = FindObjectsOfType<SpawnSpot>();
-        
-    }
-
-
-    public void Connect() {
-        if (isOfflineMode) {
-            PhotonNetwork.offlineMode = true;
-            OnJoinedLobby();
-            SpawnMyPlayer();
-            
-            
-        } else {
-            PhotonNetwork.ConnectUsingSettings("Trap-Master:0.0.1");
-        }
-    }
-
-    private void OnGUI()
-    {
-        GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-
-    }
-    void OnJoinedLobby() {
-        Debug.Log("OnJoinedLobby");
-        PhotonNetwork.JoinRandomRoom();
-    }
-
-    void OnPhotonRandomJoinFailed() {
-        Debug.Log("OnJoinedRandomRoomFailed");
-        PhotonNetwork.CreateRoom(null);
-    }
-
-    void OnJoinedRoom() {
-        Debug.Log("Yay Joined Room");
-        // SpawnMyPlayer();
-    }
-
-    void SpawnMyPlayer() {
-        var mySpawnSpot = spawnSpots[Random.Range(0, spawnSpots.Length)];
-        GameObject myPlayerGO = PhotonNetwork.Instantiate("PlayerController", mySpawnSpot.transform.position, mySpawnSpot.transform.rotation, group);
-        stanbyCamera.SetActive(false);
-        ((MonoBehaviour) myPlayerGO.GetComponent("FirstPersonController")).enabled = true;
-        ((MonoBehaviour) myPlayerGO.transform.GetComponent("PlayerLayingTrap")).enabled = true;
-        myPlayerGO.transform.Find("FirstPersonCharacter").GetComponent<Camera>().enabled = true;
-        myPlayerGO.transform.Find("FirstPersonCharacter").GetComponent<AudioListener>().enabled = true;
-        myPlayerGO.GetComponent<PlayerStatus>().teamID = this.teamID;
-        this.teamID = myPlayerGO.GetComponent<PlayerStatus>().teamID;
-        trapMenu.gameObject.SetActive(false);
-        healthBar.gameObject.SetActive(true);
-        Debug.Log("Spawned My Player");
-        
-    }
 
     public void QuitGame()
     {
@@ -138,7 +79,6 @@ public class NetworkManager : MonoBehaviour {
             trapMenu.gameObject.SetActive(clicked);
             teamAReady.gameObject.SetActive(false);
             teamID = 1;
-            gameObject.GetComponent<TrapMenuManager>().Update();
 
         }
         else
@@ -148,15 +88,15 @@ public class NetworkManager : MonoBehaviour {
         }
 
     }
+
     public void BChooseTrap(bool clicked)
     {
         if (clicked == true)
         {
             trapMenu.gameObject.SetActive(clicked);
             teamBReady.gameObject.SetActive(false);
-
+            
             teamID = 2;
-            gameObject.GetComponent<TrapMenuManager>().Update();
         }
         else
         {
