@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 135796696389515936}
   - component: {fileID: 114569422714818704}
   - component: {fileID: 114158974804246908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spike Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 65347762290458308}
   - component: {fileID: 135764143124214074}
   - component: {fileID: 114212906730325926}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpikeEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1590474215832052}
   serializedVersion: 2
-  m_Mass: 20
+  m_Mass: 10000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
