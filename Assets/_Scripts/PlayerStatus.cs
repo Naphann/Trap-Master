@@ -10,10 +10,16 @@ public class PlayerStatus : MonoBehaviour {
     public float maxFlashDuration;
     private float currentHP;
     private float currentO2;
+
+    // for ui
     public int teamID;
-    public Text showHP;
-    public Text showOxy;
-    public Text showTeam;
+    public CanvasGroup showHPCG;
+    public CanvasGroup showO2CG;
+    public CanvasGroup showTeamCG;
+    private Text showHP;
+    private Text showOxy;
+    private Text showTeam;
+
     // var for flash screen    
     public CanvasGroup flashPanel;
     private bool isFlash;
@@ -30,6 +36,10 @@ public class PlayerStatus : MonoBehaviour {
         currentO2 = MaxO2;
         isFlash = false;
         flashPanel.alpha = 0.0f;
+
+        showHP = showHPCG.GetComponent<Text>();
+        showOxy = showO2CG.GetComponent<Text>();
+        showTeam = showTeamCG.GetComponent<Text>();
     }
 
     // Update is called once per frame

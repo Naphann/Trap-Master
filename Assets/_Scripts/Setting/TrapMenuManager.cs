@@ -10,14 +10,14 @@ public class TrapMenuManager : MonoBehaviour {
     public Text text;
     // Use this for initialization
 
-    public void Update()
-    {
-        timeLeft -= Time.deltaTime;
-        text.text = "Time Left:" + Mathf.Round(timeLeft);
-        if (timeLeft < 0)
-        {
-            GameObject.Find("_Scripts").GetComponent<NetworkManager>().Connect();
-            this.enabled = false;
+    public void Update() {
+        if (text != null && trapMenu != null) {
+            timeLeft -= Time.deltaTime;
+            text.text = "Time Left:" + Mathf.Round(timeLeft);
+            if (timeLeft < 0) {
+                GameObject.Find("_Scripts").GetComponent<NetworkManager>().Connect();
+                this.enabled = false;
+            }
         }
     }
 
