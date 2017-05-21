@@ -13,10 +13,19 @@ public class NetworkManager : MonoBehaviour {
     public Transform teamMenu, mainMenu, teamAReady, teamBReady, trapMenu, tutorial, healthBar;
     public int teamID = 0;
     public string playerName;
+    public float respawnTimer;
     // Use this for initialization
     void Start() {
         spawnSpots = FindObjectsOfType<SpawnSpot>();
-        
+    }
+
+    void Update() {
+        if (respawnTimer > 0) {
+            respawnTimer -= Time.deltaTime;
+            if (respawnTimer <= 0) {
+                SpawnMyPlayer();
+            }
+        }
     }
 
 
@@ -25,17 +34,13 @@ public class NetworkManager : MonoBehaviour {
             PhotonNetwork.offlineMode = true;
             OnJoinedLobby();
             SpawnMyPlayer();
-            
-            
         } else {
             PhotonNetwork.ConnectUsingSettings("Trap-Master:0.0.1");
         }
     }
 
-    private void OnGUI()
-    {
+    private void OnGUI() {
         GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-
     }
     void OnJoinedLobby() {
         Debug.Log("OnJoinedLobby");
@@ -65,104 +70,75 @@ public class NetworkManager : MonoBehaviour {
         trapMenu.gameObject.SetActive(false);
         healthBar.gameObject.SetActive(true);
         Debug.Log("Spawned My Player");
-        
+
     }
 
-    public void QuitGame()
-    {
+    public void QuitGame() {
         Application.Quit();
     }
     // Update is called once per frame
-    public void ShowTutorial(bool clicked)
-    {
-        if (clicked == true)
-        {
+    public void ShowTutorial(bool clicked) {
+        if (clicked == true) {
             tutorial.gameObject.SetActive(clicked);
             mainMenu.gameObject.SetActive(false);
             playerName = gameObject.GetComponent<InputField>().text;
             Debug.Log(playerName);
-        }
-        else
-        {
+        } else {
             tutorial.gameObject.SetActive(clicked);
             mainMenu.gameObject.SetActive(true);
         }
-
     }
-    public void ReadyToChooseTeam (bool clicked) {
-        if (clicked == true)
-        {
+    public void ReadyToChooseTeam(bool clicked) {
+        if (clicked == true) {
             teamMenu.gameObject.SetActive(clicked);
             tutorial.gameObject.SetActive(false);
-        } else
-        {
+        } else {
             teamMenu.gameObject.SetActive(clicked);
             tutorial.gameObject.SetActive(true);
         }
-		
-	}
+    }
 
-    public void WaitingTeamAReady(bool clicked)
-    {
-        if (clicked == true)
-        {
+    public void WaitingTeamAReady(bool clicked) {
+        if (clicked == true) {
             teamAReady.gameObject.SetActive(clicked);
             teamMenu.gameObject.SetActive(false);
-        }
-        else
-        {
+        } else {
             teamAReady.gameObject.SetActive(clicked);
             teamMenu.gameObject.SetActive(true);
         }
-
     }
-    public void WaitingTeamBReady(bool clicked)
-    {
-        if (clicked == true)
-        {
+    public void WaitingTeamBReady(bool clicked) {
+        if (clicked == true) {
             teamBReady.gameObject.SetActive(clicked);
             teamMenu.gameObject.SetActive(false);
-        }
-        else
-        {
+        } else {
             teamBReady.gameObject.SetActive(clicked);
             teamMenu.gameObject.SetActive(true);
         }
-
     }
 
-    public void AChooseTrap(bool clicked)
-    {
-        if (clicked == true)
-        {
+    public void AChooseTrap(bool clicked) {
+        if (clicked == true) {
             trapMenu.gameObject.SetActive(clicked);
             teamAReady.gameObject.SetActive(false);
             teamID = 1;
             gameObject.GetComponent<TrapMenuManager>().Update();
 
-        }
-        else
-        {
+        } else {
             trapMenu.gameObject.SetActive(clicked);
             teamAReady.gameObject.SetActive(true);
         }
-
     }
-    public void BChooseTrap(bool clicked)
-    {
-        if (clicked == true)
-        {
+    public void BChooseTrap(bool clicked) {
+        if (clicked == true) {
             trapMenu.gameObject.SetActive(clicked);
             teamBReady.gameObject.SetActive(false);
 
             teamID = 2;
             gameObject.GetComponent<TrapMenuManager>().Update();
-        }
-        else
-        {
+        } else {
             trapMenu.gameObject.SetActive(clicked);
             teamBReady.gameObject.SetActive(true);
         }
-
     }
 }

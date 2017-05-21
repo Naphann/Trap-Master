@@ -66,17 +66,38 @@ public class PlayerStatus : MonoBehaviour {
             moveSpan -= Time.deltaTime;
             gameObject.GetComponent<CharacterController>().Move(moveDir * Time.deltaTime);
         }
+
+
     }
 
     [PunRPC]
     public void TakeDamage(float damage) {
         currentHP -= damage;
         Debug.Log("Take Damage!!! current HP: " + currentHP);
+        if (currentHP <= 0) {
+            Die();
+        }
     }
 
     [PunRPC]
     public void ReduceO2(float amt) {
         currentO2 -= amt;
+        if (currentO2 <= 0) {
+            Die();
+        }
+    }
+
+    public void Die() {
+        if (GetComponent<PhotonView>().isMine) {
+            if (gameObject.CompareTag("Player")) {
+                NetworkManager nm = GameObject.FindObjectOfType<NetworkManager>();
+
+                nm.stanbyCamera.SetActive(false);
+                nm.respawnTimer = 5f;
+            }
+        }
+
+        PhotonNetwork.Destroy(gameObject);
     }
 
     [PunRPC]
