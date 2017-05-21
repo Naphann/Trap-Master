@@ -2,28 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RadiusActivateTrap : MonoBehaviour {
+public class OneDActivateTrap : MonoBehaviour {
 
-    public float activateRadius = 8;    
+    public float activateRange = 8;
     public float delay = 2f;
     public float duration = 1f;
-    private float currentRadius = 0.0f;
-    private bool isActive = false;
-    private bool isDetnotate = false;
+    private float currentRange;
+    private bool isActive;
+    private bool isDetnotate;
 
 
     // Use this for initialization
     void Start() {
-        currentRadius = 0;
+        currentRange = 0;
+        isActive = false;
         isDetnotate = false;
     }
 
     // Update is called once per frame
     void Update() {
         delay -= Time.deltaTime;
-        if (currentRadius < activateRadius) {
-            currentRadius += 1.0f * Time.deltaTime * 5;
-            gameObject.GetComponent<SphereCollider>().radius = currentRadius;
+        if (currentRange < activateRange) {
+            currentRange += 1.0f * Time.deltaTime * 5;
+            gameObject.GetComponent<BoxCollider>().size = new Vector3(1, currentRange, currentRange);
+            gameObject.GetComponent<BoxCollider>().center = new Vector3(0, 0, currentRange / 2);
         }
         if (!isActive && delay <= 0) {
             isActive = true;
@@ -44,11 +46,16 @@ public class RadiusActivateTrap : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (!isDetnotate && other.gameObject.CompareTag("Player")) {
-            //Debug.Log("Radius Trap Trigger");
             isDetnotate = true;
             DoEffect();
         }
     }
+
+    private void OnTriggerExit(Collider other) {
+        //if ()
+    }
+
+
 
     private void DoEffect() {
         //Debug.Log("Do effect");

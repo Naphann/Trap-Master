@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RadiusActivateTrap : MonoBehaviour {
+public class RemoteActivateTrap : MonoBehaviour {
 
-    public float activateRadius = 8;    
+    public float activationRange = 30;
     public float delay = 2f;
     public float duration = 1f;
     private float currentRadius = 0.0f;
@@ -21,7 +21,7 @@ public class RadiusActivateTrap : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         delay -= Time.deltaTime;
-        if (currentRadius < activateRadius) {
+        if (currentRadius < activationRange) {
             currentRadius += 1.0f * Time.deltaTime * 5;
             gameObject.GetComponent<SphereCollider>().radius = currentRadius;
         }
@@ -38,21 +38,13 @@ public class RadiusActivateTrap : MonoBehaviour {
 
     private void Die() {
         // send to MasterClient to remove this trap from the map
-        // Debug.Log("Trap die");
         PhotonNetwork.Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (!isDetnotate && other.gameObject.CompareTag("Player")) {
-            //Debug.Log("Radius Trap Trigger");
-            isDetnotate = true;
-            DoEffect();
-        }
-    }
-
-    private void DoEffect() {
-        //Debug.Log("Do effect");
+    [PunRPC]
+    public void DoEffect(Vector3 activatorPosition) {
         var activationScript = GetComponentInChildren<ITrapActivation>();
         activationScript.Activate();
+        isDetnotate = true;
     }
 }

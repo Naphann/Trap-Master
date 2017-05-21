@@ -44,4 +44,5 @@ MonoBehaviour:
   - TaggedPlayer
   - TakeDamage
   - ReduceO2
+  - DoEffect
   DisableAutoOpenWizard: 1
