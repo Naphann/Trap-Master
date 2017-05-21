@@ -8,8 +8,7 @@ public class PlayerLayingTrap : MonoBehaviour {
     private HashSet<GameObject> trapsLaid;
 
     private void Start() {
-        trapsLaid = new HashSet<GameObject>();
-        traptype = "Remote Trap";
+        trapsLaid = new HashSet<GameObject>();        
     }
     // Update is called once per frame
     void Update() {

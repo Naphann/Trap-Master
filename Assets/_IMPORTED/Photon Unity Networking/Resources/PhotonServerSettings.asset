@@ -45,4 +45,5 @@ MonoBehaviour:
   - TakeDamage
   - ReduceO2
   - DoEffect
+  - FlashScreen
   DisableAutoOpenWizard: 1
