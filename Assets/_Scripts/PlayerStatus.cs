@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour {
 
@@ -9,7 +10,10 @@ public class PlayerStatus : MonoBehaviour {
     public float maxFlashDuration;
     private float currentHP;
     private float currentO2;
-
+    public int teamID;
+    public Text showHP;
+    public Text showOxy;
+    public Text showTeam;
     // var for flash screen    
     public CanvasGroup flashPanel;
     private bool isFlash;
@@ -30,6 +34,9 @@ public class PlayerStatus : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        showHP.text = "HP : " + currentHP.ToString();
+        showOxy.text = "OXYGEN : " + currentO2.ToString();
+        showTeam.text = "TEAM: " + teamID.ToString();
         if (isFlash) {
             //Debug.Log("current intensity " + myCG.alpha);
             float minus = Time.deltaTime / maxFlashDuration;
