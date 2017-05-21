@@ -19,6 +19,8 @@ public class PlayerStatus : MonoBehaviour {
     private Text showHP;
     private Text showOxy;
     private Text showTeam;
+    private float nextUpdateUI;
+    private float lastUpdateUI;
 
     // var for flash screen    
     public CanvasGroup flashPanel;
@@ -40,13 +42,20 @@ public class PlayerStatus : MonoBehaviour {
         showHP = showHPCG.GetComponent<Text>();
         showOxy = showO2CG.GetComponent<Text>();
         showTeam = showTeamCG.GetComponent<Text>();
+
+        nextUpdateUI = 0f;
+        lastUpdateUI = 0f;
     }
 
     // Update is called once per frame
     void Update() {
-        showHP.text = "HP : " + currentHP.ToString();
-        showOxy.text = "OXYGEN : " + currentO2.ToString();
-        showTeam.text = "TEAM: " + teamID.ToString();
+        if (nextUpdateUI <= lastUpdateUI) {
+            showHP.text = "HP : " + ((int)currentHP).ToString();
+            showOxy.text = "OXYGEN : " + ((int)currentO2).ToString();
+            showTeam.text = "TEAM: " + teamID.ToString();
+            nextUpdateUI += 0.5f;
+        }
+        lastUpdateUI += Time.deltaTime;
         if (isFlash) {
             //Debug.Log("current intensity " + myCG.alpha);
             float minus = Time.deltaTime / maxFlashDuration;
@@ -66,7 +75,7 @@ public class PlayerStatus : MonoBehaviour {
             moveSpan -= Time.deltaTime;
             gameObject.GetComponent<CharacterController>().Move(moveDir * Time.deltaTime);
         }
-
+        currentO2 -= Time.deltaTime;
 
     }
 
@@ -92,7 +101,7 @@ public class PlayerStatus : MonoBehaviour {
             if (gameObject.CompareTag("Player")) {
                 NetworkManager nm = GameObject.FindObjectOfType<NetworkManager>();
 
-                nm.stanbyCamera.SetActive(false);
+                nm.stanbyCamera.SetActive(true);
                 nm.respawnTimer = 5f;
             }
         }

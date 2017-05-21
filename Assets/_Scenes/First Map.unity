@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.19133887, g: 0.14387348, b: 0.15424642, a: 1}
+  m_IndirectSpecularColor: {r: 0.19165757, g: 0.14389059, b: 0.15461096, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2136,7 +2136,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.35, y: -21}
+  m_AnchoredPosition: {x: -1.3499999, y: -21}
   m_SizeDelta: {x: -172.5, y: -222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &604651781
@@ -2462,6 +2462,7 @@ MonoBehaviour:
   healthBar: {fileID: 151558906}
   teamID: 0
   playerName: 
+  respawnTimer: 0
 --- !u!4 &845379136
 Transform:
   m_ObjectHideFlags: 0
@@ -2487,8 +2488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapMenu: {fileID: 1479253132}
-  timeLeft: 5
-  text: {fileID: 0}
+  timeLeft: 15
+  text: {fileID: 1925612883}
 --- !u!1 &932493545
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,6 +3489,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   teamID: 0
   playerName: 
+  respawnTimer: 0
 --- !u!114 &1347642594
 MonoBehaviour:
   m_ObjectHideFlags: 0
