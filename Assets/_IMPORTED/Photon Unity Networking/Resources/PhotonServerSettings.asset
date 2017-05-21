@@ -46,4 +46,5 @@ MonoBehaviour:
   - ReduceO2
   - DoEffect
   - FlashScreen
+  - MoveByForce
   DisableAutoOpenWizard: 1

@@ -22,7 +22,7 @@ public class OneDPullActivation : MonoBehaviour, ITrapActivation {
     // Update is called once per frame
     void Update() {
         if (isActive) {
-            Debug.Log("PUlling");
+            //Debug.Log("PUlling");
             foreach (var playerGO in playersInEffect) {
                 var rb = playerGO.GetComponent<Rigidbody>();
                 var gravity = gameObject.transform.position - rb.transform.position;

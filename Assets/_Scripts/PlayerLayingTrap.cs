@@ -4,27 +4,47 @@ using UnityEngine;
 
 public class PlayerLayingTrap : MonoBehaviour {
 
+    // if using gun = true 
+    // otherwise using traps
+    public bool isHoldingGun = true;
+    // for Traps
     public string traptype = "Trap-A";
     private HashSet<GameObject> trapsLaid;
 
+    // for O2 Gun
+    public CanvasGroup crossHair;    
+    public float O2GunRange = 30f;
+    public float hitForce = 25f;
+    private float gunCooldown;
+
     private void Start() {
-        trapsLaid = new HashSet<GameObject>();        
+        trapsLaid = new HashSet<GameObject>();
     }
+
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("Fire1")) {
-            LayTrap();
-        }
-        if (Input.GetButtonDown("Fire2") && traptype == "Remote Trap") {
-            List<GameObject> removeList = new List<GameObject>();
-            foreach (var trapGO in trapsLaid) {
-                if ((trapGO.transform.position - gameObject.transform.position).magnitude <= 30f) {
-                    trapGO.GetComponent<PhotonView>().RPC("DoEffect", PhotonTargets.All, gameObject.transform.position);
-                    removeList.Add(trapGO);
-                }
+        gunCooldown -= Time.deltaTime;
+        if (isHoldingGun) {
+            crossHair.alpha = 1f;
+            if (Input.GetButtonDown("Fire1")) {
+                Fire();
             }
-            foreach (var trapGO in removeList) {
-                trapsLaid.Remove(trapGO);
+        } else {
+            crossHair.alpha = 0f;
+            if (Input.GetButtonDown("Fire1")) {
+                LayTrap();
+            }
+            if (Input.GetButtonDown("Fire2") && traptype == "Remote Trap") {
+                List<GameObject> removeList = new List<GameObject>();
+                foreach (var trapGO in trapsLaid) {
+                    if ((trapGO.transform.position - gameObject.transform.position).magnitude <= 30f) {
+                        trapGO.GetComponent<PhotonView>().RPC("DoEffect", PhotonTargets.All, gameObject.transform.position);
+                        removeList.Add(trapGO);
+                    }
+                }
+                foreach (var trapGO in removeList) {
+                    trapsLaid.Remove(trapGO);
+                }
             }
         }
     }
@@ -35,4 +55,37 @@ public class PlayerLayingTrap : MonoBehaviour {
         var trapGO = PhotonNetwork.Instantiate(traptype, trapPosition, Quaternion.identity, 0);
         trapsLaid.Add(trapGO);
     }
+
+    void Fire() {
+        if (gunCooldown > 0) {
+            return;
+        }
+        gunCooldown = 1.0f;
+        gameObject.GetComponent<PhotonView>().RPC("ReduceO2", PhotonTargets.All, 20.0f);
+        Vector3 rayOrigin = gameObject.transform.position;
+        RaycastHit hit;
+
+        if (Physics.Raycast(rayOrigin, gameObject.transform.forward, out hit, O2GunRange)) {
+            if (hit.collider.CompareTag("Player")) {
+                var playerGO = hit.collider.gameObject;
+                float dist, span;
+                dist = hitForce;
+                span = 0.5f;
+                //playerGO.GetComponent<CharacterController>().Move(-hit.normal * hitForce);
+                playerGO.GetComponent<PhotonView>().RPC("MoveByForce", PhotonTargets.All, gameObject.transform.forward, dist, span);
+            }
+        }
+
+        RecoilFromFiring();
+    }
+
+    void RecoilFromFiring() {
+        float distance = hitForce / 2;
+        float timespan = 0.25f;
+        Vector3 dir = gameObject.transform.forward;
+        gameObject.GetComponent<PhotonView>().RPC("MoveByForce", PhotonTargets.All, -dir, distance, timespan);
+        //var pushbackForce = -gameObject.transform.forward * hitForce / 2;
+        //gameObject.GetComponent<CharacterController>().Move(pushbackForce * Time.deltaTime * 10);
+    }
+
 }

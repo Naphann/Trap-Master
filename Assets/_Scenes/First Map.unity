@@ -478,6 +478,10 @@ Prefab:
       propertyPath: m_Name
       value: Spawn (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1362757477134832, guid: c6c276ceb46bc9740b702cd33c7a7d99, type: 2}
+      propertyPath: m_TagString
+      value: SpawnSpot
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6c276ceb46bc9740b702cd33c7a7d99, type: 2}
   m_IsPrefabParent: 0
@@ -539,6 +543,14 @@ Prefab:
         type: 2}
       propertyPath: instantiationId
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862833328268256, guid: dc309a714f065ef488d0ee3b63c0179a, type: 2}
+      propertyPath: m_TagString
+      value: Trap
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230911235377006, guid: dc309a714f065ef488d0ee3b63c0179a, type: 2}
+      propertyPath: m_TagString
+      value: Trap
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc309a714f065ef488d0ee3b63c0179a, type: 2}
@@ -628,6 +640,10 @@ Prefab:
     - target: {fileID: 1362757477134832, guid: c6c276ceb46bc9740b702cd33c7a7d99, type: 2}
       propertyPath: m_Name
       value: Spawn (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362757477134832, guid: c6c276ceb46bc9740b702cd33c7a7d99, type: 2}
+      propertyPath: m_TagString
+      value: SpawnSpot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6c276ceb46bc9740b702cd33c7a7d99, type: 2}
@@ -967,6 +983,10 @@ Prefab:
     - target: {fileID: 4723575294221966, guid: c6c276ceb46bc9740b702cd33c7a7d99, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362757477134832, guid: c6c276ceb46bc9740b702cd33c7a7d99, type: 2}
+      propertyPath: m_TagString
+      value: SpawnSpot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6c276ceb46bc9740b702cd33c7a7d99, type: 2}
