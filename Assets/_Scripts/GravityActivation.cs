@@ -12,6 +12,8 @@ public class GravityActivation : MonoBehaviour, ITrapActivation {
     private HashSet<GameObject> playersInEffect;
     // Use this for initialization
     void Start() {
+        var system = gameObject.GetComponent<ParticleSystem>();
+        system.Stop();
         isActive = false;
         playersInEffect = new HashSet<GameObject>();
         gameObject.GetComponent<SphereCollider>().radius = effectiveRadius;
@@ -52,6 +54,9 @@ public class GravityActivation : MonoBehaviour, ITrapActivation {
     }
 
     public void Activate() {
+        var system = gameObject.GetComponent<ParticleSystem>();
+        system.Play();
+
         isActive = true;
     }
 }
