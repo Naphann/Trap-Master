@@ -582,8 +582,10 @@ MonoBehaviour:
   maxFlashDuration: 7
   teamID: 0
   showHPCG: {fileID: 225799385170388538}
-  showO2CG: {fileID: 225266455914885584}
+  showO2CG: {fileID: 225303200835181354, guid: e9981c33456132d44b390a449fea6669, type: 2}
   showTeamCG: {fileID: 225255073725577302}
+  showScoreCG: {fileID: 225736216806619248, guid: e9981c33456132d44b390a449fea6669,
+    type: 2}
   flashPanel: {fileID: 225431524117612294}
 --- !u!114 &114249758100963012
 MonoBehaviour:

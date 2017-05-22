@@ -47,4 +47,5 @@ MonoBehaviour:
   - DoEffect
   - FlashScreen
   - MoveByForce
+  - counterBox
   DisableAutoOpenWizard: 1
