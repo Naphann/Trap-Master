@@ -13,6 +13,7 @@ public class NetworkManager : MonoBehaviour {
     public Transform teamMenu, mainMenu, teamAReady, teamBReady, trapMenu, tutorial, healthBar;
     public int teamID = 0;
     public string playerName;
+    public string traptype;
     // Use this for initialization
     void Start() {
         spawnSpots = FindObjectsOfType<SpawnSpot>();
@@ -61,9 +62,9 @@ public class NetworkManager : MonoBehaviour {
         myPlayerGO.transform.Find("FirstPersonCharacter").GetComponent<Camera>().enabled = true;
         myPlayerGO.transform.Find("FirstPersonCharacter").GetComponent<AudioListener>().enabled = true;
         myPlayerGO.GetComponent<PlayerStatus>().teamID = this.teamID;
-        this.teamID = myPlayerGO.GetComponent<PlayerStatus>().teamID;
-        trapMenu.gameObject.SetActive(false);
+        myPlayerGO.GetComponent<PlayerLayingTrap>().traptype = this.traptype;
         healthBar.gameObject.SetActive(true);
+        trapMenu.gameObject.SetActive(false);
         Debug.Log("Spawned My Player");
         
     }
@@ -154,7 +155,6 @@ public class NetworkManager : MonoBehaviour {
         {
             trapMenu.gameObject.SetActive(clicked);
             teamBReady.gameObject.SetActive(false);
-
             teamID = 2;
             gameObject.GetComponent<TrapMenuManager>().Update();
         }

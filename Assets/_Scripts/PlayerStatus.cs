@@ -10,15 +10,18 @@ public class PlayerStatus : MonoBehaviour {
     public float maxFlashDuration;
     private float currentHP;
     private float currentO2;
+    private int countBox;
 
     // for ui
     public int teamID;
     public CanvasGroup showHPCG;
     public CanvasGroup showO2CG;
     public CanvasGroup showTeamCG;
+    public CanvasGroup showScoreCG;
     private Text showHP;
     private Text showOxy;
     private Text showTeam;
+    private Text showScore;
 
     // var for flash screen    
     public CanvasGroup flashPanel;
@@ -34,12 +37,14 @@ public class PlayerStatus : MonoBehaviour {
     void Start() {
         currentHP = MaxHP;
         currentO2 = MaxO2;
+        countBox = 0;
         isFlash = false;
         flashPanel.alpha = 0.0f;
 
         showHP = showHPCG.GetComponent<Text>();
         showOxy = showO2CG.GetComponent<Text>();
         showTeam = showTeamCG.GetComponent<Text>();
+        showScore = showScoreCG.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -47,6 +52,7 @@ public class PlayerStatus : MonoBehaviour {
         showHP.text = "HP : " + currentHP.ToString();
         showOxy.text = "OXYGEN : " + currentO2.ToString();
         showTeam.text = "TEAM: " + teamID.ToString();
+
         if (isFlash) {
             //Debug.Log("current intensity " + myCG.alpha);
             float minus = Time.deltaTime / maxFlashDuration;
@@ -66,6 +72,11 @@ public class PlayerStatus : MonoBehaviour {
             moveSpan -= Time.deltaTime;
             gameObject.GetComponent<CharacterController>().Move(moveDir * Time.deltaTime);
         }
+
+        if (currentHP <= 0)
+        {
+            gameObject.GetComponent<CharacterController>().enabled = false;
+        }
     }
 
     [PunRPC]
@@ -76,8 +87,9 @@ public class PlayerStatus : MonoBehaviour {
 
     [PunRPC]
     public void ReduceO2(float amt) {
-        currentO2 -= amt;
+        currentO2 -= amt; 
     }
+
 
     [PunRPC]
     public void FlashScreen(float intensity) {
