@@ -521,13 +521,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1416400499697334}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e81500265022e0f49a8cc1bcf0c80ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHoldingGun: 1
-  traptype: Flash Trap
+  isHoldingGun: 0
+  traptype: 
   crossHair: {fileID: 225948077897341940}
   O2GunRange: 30
   hitForce: 25
@@ -584,8 +584,6 @@ MonoBehaviour:
   showHPCG: {fileID: 225799385170388538}
   showO2CG: {fileID: 225303200835181354, guid: e9981c33456132d44b390a449fea6669, type: 2}
   showTeamCG: {fileID: 225255073725577302}
-  showScoreCG: {fileID: 225736216806619248, guid: e9981c33456132d44b390a449fea6669,
-    type: 2}
   flashPanel: {fileID: 225431524117612294}
 --- !u!114 &114249758100963012
 MonoBehaviour:

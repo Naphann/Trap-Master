@@ -14,6 +14,7 @@ public class NetworkManager : MonoBehaviour {
     public int teamID = 0;
     public string playerName;
     public float respawnTimer;
+    public string traptype;
     // Use this for initialization
     void Start() {
         spawnSpots = FindObjectsOfType<SpawnSpot>();
@@ -66,7 +67,7 @@ public class NetworkManager : MonoBehaviour {
         myPlayerGO.transform.Find("FirstPersonCharacter").GetComponent<Camera>().enabled = true;
         myPlayerGO.transform.Find("FirstPersonCharacter").GetComponent<AudioListener>().enabled = true;
         myPlayerGO.GetComponent<PlayerStatus>().teamID = this.teamID;
-        this.teamID = myPlayerGO.GetComponent<PlayerStatus>().teamID;
+        myPlayerGO.GetComponent<PlayerLayingTrap>().traptype= this.traptype;
         trapMenu.gameObject.SetActive(false);
         healthBar.gameObject.SetActive(true);
         Debug.Log("Spawned My Player");
