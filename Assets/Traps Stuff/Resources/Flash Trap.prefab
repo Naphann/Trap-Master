@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateRadius: 10
-  delay: 0.2
+  delay: 2
   duration: 1
 --- !u!114 &114817268587776712
 MonoBehaviour:
