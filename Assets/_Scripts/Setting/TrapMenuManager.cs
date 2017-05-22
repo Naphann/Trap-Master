@@ -32,6 +32,7 @@ public class TrapMenuManager : MonoBehaviour {
         if (clicked)
         {
             this.traptype = EventSystem.current.currentSelectedGameObject.name;
+            Debug.Log("select trap " + traptype);
             Update();
         }
     }

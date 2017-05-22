@@ -55,7 +55,8 @@ public class NetworkManager : MonoBehaviour {
 
     void OnJoinedRoom() {
         Debug.Log("Yay Joined Room");
-        // SpawnMyPlayer();
+        SpawnMyPlayer();
+        gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, 101f);
     }
 
     void SpawnMyPlayer() {

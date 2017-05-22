@@ -24,6 +24,9 @@ public class PlayerLayingTrap : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         gunCooldown -= Time.deltaTime;
+        if (Input.GetButtonDown("Submit")) {
+            isHoldingGun = ! isHoldingGun;
+        }
         if (isHoldingGun) {
             crossHair.alpha = 1f;
             if (Input.GetButtonDown("Fire1")) {

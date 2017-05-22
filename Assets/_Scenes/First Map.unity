@@ -1164,6 +1164,10 @@ Prefab:
       propertyPath: instantiationId
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1568836933757678, guid: ff4aba00539d5a44db6ff60c8e73515a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ff4aba00539d5a44db6ff60c8e73515a, type: 2}
   m_IsPrefabParent: 0
@@ -1729,6 +1733,10 @@ Prefab:
         type: 2}
       propertyPath: instantiationId
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1296000830618826, guid: 6528fd9c86cc693428dae2d0c750846d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6528fd9c86cc693428dae2d0c750846d, type: 2}
@@ -2802,6 +2810,10 @@ Prefab:
       propertyPath: instantiationId
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1862833328268256, guid: dc309a714f065ef488d0ee3b63c0179a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc309a714f065ef488d0ee3b63c0179a, type: 2}
   m_IsPrefabParent: 0
@@ -2835,7 +2847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   group: 0
   stanbyCamera: {fileID: 1045768400}
-  isOfflineMode: 1
+  isOfflineMode: 0
   teamMenu: {fileID: 314899634}
   mainMenu: {fileID: 1890017811}
   teamAReady: {fileID: 1123641013}
@@ -3101,6 +3113,10 @@ Prefab:
         type: 2}
       propertyPath: instantiationId
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386107721181694, guid: 47d6338ec50d66f459ffad797c148dda, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47d6338ec50d66f459ffad797c148dda, type: 2}
@@ -4077,6 +4093,10 @@ Prefab:
         type: 2}
       propertyPath: instantiationId
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849858908988954, guid: 365b16c0f8e03be4b982aae055a527e6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 365b16c0f8e03be4b982aae055a527e6, type: 2}
@@ -5066,7 +5086,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
