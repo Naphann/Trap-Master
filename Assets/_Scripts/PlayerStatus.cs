@@ -49,7 +49,8 @@ public class PlayerStatus : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (nextUpdateUI <= lastUpdateUI) {
+        var pv = GetComponent<PhotonView>();
+        if (nextUpdateUI <= lastUpdateUI && pv.isMine) {
             showHP.text = "HP : " + ((int)currentHP).ToString();
             showOxy.text = "OXYGEN : " + ((int)currentO2).ToString();
             showTeam.text = "TEAM: " + teamID.ToString();
@@ -76,6 +77,10 @@ public class PlayerStatus : MonoBehaviour {
             gameObject.GetComponent<CharacterController>().Move(moveDir * Time.deltaTime);
         }
         currentO2 -= Time.deltaTime;
+        if (currentO2 <= 0)
+        {
+            Die();
+        }
 
     }
 

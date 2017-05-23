@@ -66,20 +66,25 @@ public class PlayerLayingTrap : MonoBehaviour {
         gunCooldown = 1.0f;
         gameObject.GetComponent<PhotonView>().RPC("ReduceO2", PhotonTargets.All, 20.0f);
         Vector3 rayOrigin = gameObject.transform.position;
-        RaycastHit hit;
-
-        if (Physics.Raycast(rayOrigin, gameObject.transform.forward, out hit, O2GunRange)) {
-            if (hit.collider.CompareTag("Player")) {
-                var playerGO = hit.collider.gameObject;
-                float dist, span;
-                dist = hitForce;
-                span = 0.5f;
-                //playerGO.GetComponent<CharacterController>().Move(-hit.normal * hitForce);
-                playerGO.GetComponent<PhotonView>().RPC("MoveByForce", PhotonTargets.All, gameObject.transform.forward, dist, span);
+        Ray ray = new Ray(gameObject.transform.position, gameObject.transform.forward);
+        RaycastHit[] hits = Physics.RaycastAll(ray, O2GunRange);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform != this.transform)
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Debug.Log("was shoot");
+                    var playerGO = hit.collider.gameObject;
+                    float dist, span;
+                    dist = hitForce;
+                    span = 0.5f;
+                    //playerGO.GetComponent<CharacterController>().Move(-hit.normal * hitForce);
+                    playerGO.GetComponent<PhotonView>().RPC("MoveByForce", PhotonTargets.All, gameObject.transform.forward, dist, span);
+                }
             }
         }
 
-        RecoilFromFiring();
     }
 
     void RecoilFromFiring() {
